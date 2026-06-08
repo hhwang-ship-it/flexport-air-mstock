@@ -1,0 +1,1036 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MAWB Stock — Flexport Air</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --teal:#45dabe; --teal-dim:#2bb8a0; --teal-bg:#e8faf6; --teal-dark:#0f6e56;
+  --bg:#f5f4f1; --surface:#ffffff; --surface2:#f8f7f4;
+  --border:#e4e2dc; --border2:#d0cec7;
+  --text1:#1a1916; --text2:#5a5850; --text3:#9a9890;
+  --red:#e24b4a; --red-bg:#fff0f0;
+  --amber:#ba7517; --amber-bg:#fef9ee;
+  --r-sm:6px; --r-md:10px; --r-lg:14px;
+  --shadow:0 1px 3px rgba(0,0,0,.06),0 4px 16px rgba(0,0,0,.04);
+  --shadow-lg:0 8px 32px rgba(0,0,0,.12),0 2px 8px rgba(0,0,0,.06);
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html,body{height:100%;font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text1);font-size:13px;line-height:1.5;}
+/* NAV */
+.topnav{height:52px;background:var(--surface);border-bottom:1px solid var(--border);display:flex;align-items:center;padding:0 20px;gap:12px;position:sticky;top:0;z-index:100;}
+.logo{display:flex;align-items:center;gap:8px;font-size:14px;font-weight:600;text-decoration:none;color:var(--text1);}
+.logo-mark{width:26px;height:26px;border-radius:8px;background:var(--text1);display:flex;align-items:center;justify-content:center;}
+.logo-sep{width:1px;height:18px;background:var(--border);margin:0 2px;}
+.logo-sub{font-size:12px;font-weight:400;color:var(--text3);}
+.nav-back{font-size:12px;color:var(--text2);text-decoration:none;display:flex;align-items:center;gap:4px;padding:4px 8px;border-radius:var(--r-sm);transition:background .12s;}
+.nav-back:hover{background:var(--surface2);}
+.nav-spacer{flex:1;}
+.nav-date{font-size:11px;color:var(--text3);}
+/* PAGE */
+.page{max-width:1200px;margin:0 auto;padding:24px 24px 60px;}
+.page-hdr{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:24px;gap:16px;}
+.page-title{font-size:22px;font-weight:600;letter-spacing:-.02em;}
+.page-sub{font-size:12px;color:var(--text3);margin-top:3px;}
+.page-actions{display:flex;gap:8px;flex-shrink:0;}
+/* KPI CARDS */
+.kpi-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:24px;}
+.kpi{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-lg);padding:16px 18px;}
+.kpi-label{font-size:11px;font-weight:600;color:var(--text3);letter-spacing:.04em;text-transform:uppercase;margin-bottom:8px;}
+.kpi-val{font-size:28px;font-weight:600;letter-spacing:-.02em;font-family:'DM Mono',monospace;}
+.kpi-sub{font-size:11px;color:var(--text3);margin-top:4px;}
+.kpi-val.green{color:var(--teal-dark);}
+.kpi-val.amber{color:var(--amber);}
+.kpi-val.red{color:var(--red);}
+/* AIRLINE PILLS */
+.airline-bar{display:flex;gap:8px;margin-bottom:20px;flex-wrap:wrap;}
+.airline-pill{display:flex;align-items:center;gap:8px;padding:8px 14px;border-radius:var(--r-md);border:1px solid var(--border);background:var(--surface);cursor:pointer;transition:all .12s;font-size:12px;}
+.airline-pill:hover{border-color:var(--border2);background:var(--surface2);}
+.airline-pill.active{border-color:var(--teal);background:var(--teal-bg);}
+.airline-pill-code{font-weight:700;font-family:'DM Mono',monospace;font-size:13px;}
+.airline-pill.active .airline-pill-code{color:var(--teal-dark);}
+.airline-pill-counts{display:flex;gap:4px;}
+.ap-avail{font-size:10px;font-weight:600;background:var(--teal-bg);color:var(--teal-dark);padding:1px 6px;border-radius:10px;}
+.ap-used{font-size:10px;font-weight:600;background:var(--surface2);color:var(--text3);padding:1px 6px;border-radius:10px;}
+/* TOOLBAR */
+.toolbar{display:flex;align-items:center;gap:8px;margin-bottom:12px;}
+.search-box{display:flex;align-items:center;gap:6px;border:1px solid var(--border);border-radius:var(--r-sm);padding:6px 10px;background:var(--surface);width:240px;}
+.search-box input{border:none;outline:none;background:none;font-size:12px;font-family:inherit;color:var(--text1);width:100%;}
+.search-box input::placeholder{color:var(--text3);}
+.filter-group{display:flex;gap:4px;}
+.filter-chip{font-size:11px;font-weight:500;padding:5px 12px;border-radius:20px;border:1px solid var(--border);background:var(--surface);color:var(--text2);cursor:pointer;transition:all .12s;}
+.filter-chip:hover{border-color:var(--border2);}
+.filter-chip.on{background:var(--teal-bg);border-color:var(--teal);color:var(--teal-dark);}
+.tspc{flex:1;}
+.airline-select-wrap{position:relative;display:inline-flex;align-items:center;}
+.airline-select-wrap svg{position:absolute;right:8px;pointer-events:none;color:var(--text3);}
+.airline-dropdown{appearance:none;border:1px solid var(--border);border-radius:var(--r-sm);padding:5px 28px 5px 10px;font-size:12px;font-family:'DM Sans',sans-serif;font-weight:500;color:var(--text1);background:var(--surface);cursor:pointer;outline:none;transition:border-color .12s;min-width:120px;}
+.airline-dropdown:focus,.airline-dropdown:hover{border-color:var(--border2);}
+.airline-dropdown.on{border-color:var(--teal);background:var(--teal-bg);color:var(--teal-dark);}
+/* BUTTONS */
+.btn{font-size:12px;font-weight:500;padding:7px 14px;border-radius:var(--r-sm);cursor:pointer;border:1px solid var(--border);background:var(--surface);color:var(--text1);font-family:inherit;display:inline-flex;align-items:center;gap:5px;transition:all .12s;}
+.btn:hover{border-color:var(--border2);background:var(--surface2);}
+.btn.primary{background:var(--text1);color:#fff;border-color:var(--text1);}
+.btn.primary:hover{background:#2d2c29;}
+.btn.teal{background:var(--teal);color:var(--teal-dark);border-color:var(--teal);font-weight:600;}
+.btn.teal:hover{background:var(--teal-dim);}
+.btn.sm{padding:4px 10px;font-size:11px;}
+.btn.danger{color:var(--red);border-color:var(--red);}
+/* TABLE */
+.tbl-wrap{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-lg);overflow:hidden;}
+.data-table{width:100%;border-collapse:collapse;font-size:12px;}
+.data-table th{padding:9px 12px;text-align:left;font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--text3);border-bottom:1px solid var(--border);background:var(--surface2);white-space:nowrap;}
+.data-table td{padding:10px 12px;border-bottom:1px solid var(--border);vertical-align:middle;}
+.data-table tr:last-child td{border-bottom:none;}
+.data-table tr:hover td{background:#f7fdfb;}
+.data-table tr.used td{opacity:.55;}
+.mono{font-family:'DM Mono',monospace;font-size:11.5px;}
+.fw5{font-weight:500;}
+/* STATUS BADGE */
+.badge{display:inline-flex;align-items:center;gap:4px;font-size:10px;font-weight:600;padding:3px 8px;border-radius:20px;}
+.badge-avail{background:var(--teal-bg);color:var(--teal-dark);}
+.badge-used{background:var(--surface2);color:var(--text3);border:1px solid var(--border);}
+.badge-low{background:var(--amber-bg);color:var(--amber);}
+.badge-dot{width:5px;height:5px;border-radius:50%;background:currentColor;}
+/* ASSIGN CHIP */
+.assign-chip{display:inline-flex;align-items:center;gap:5px;background:var(--surface2);border:1px solid var(--border);border-radius:var(--r-sm);padding:3px 8px;font-size:11px;}
+.assign-chip .flex-id{font-family:'DM Mono',monospace;font-weight:500;color:var(--text1);}
+.assign-chip .client{color:var(--text2);}
+/* ASSIGN BUTTON */
+.assign-btn{font-size:11px;font-weight:500;padding:3px 10px;border-radius:var(--r-sm);border:1px dashed var(--border2);background:none;color:var(--text3);cursor:pointer;font-family:inherit;transition:all .12s;}
+.assign-btn:hover{border-color:var(--teal);color:var(--teal-dark);background:var(--teal-bg);}
+/* EMPTY */
+.empty{text-align:center;padding:48px 24px;color:var(--text3);}
+.empty-icon{font-size:32px;margin-bottom:8px;opacity:.4;}
+/* MODAL */
+.overlay{position:fixed;inset:0;background:rgba(0,0,0,.35);z-index:200;display:none;align-items:center;justify-content:center;}
+.overlay.open{display:flex;}
+.modal{background:var(--surface);border-radius:var(--r-lg);box-shadow:var(--shadow-lg);width:520px;max-width:96vw;max-height:90vh;display:flex;flex-direction:column;animation:mIn .18s ease;}
+@keyframes mIn{from{transform:translateY(12px);opacity:0}to{transform:translateY(0);opacity:1}}
+.modal-hdr{padding:18px 20px 14px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:10px;}
+.modal-title{font-size:15px;font-weight:600;flex:1;}
+.modal-x{width:28px;height:28px;border-radius:var(--r-sm);border:1px solid var(--border);background:none;cursor:pointer;color:var(--text3);font-size:16px;font-family:inherit;display:flex;align-items:center;justify-content:center;}
+.modal-x:hover{background:var(--surface2);}
+.modal-body{flex:1;overflow-y:auto;padding:18px 20px;}
+.modal-ftr{padding:14px 20px;border-top:1px solid var(--border);display:flex;gap:8px;justify-content:flex-end;}
+/* FORM */
+.fg{display:flex;flex-direction:column;gap:4px;margin-bottom:14px;}
+.fg2{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+.flabel{font-size:11px;font-weight:600;color:var(--text2);}
+.flabel span{color:var(--red);}
+.finput{border:1px solid var(--border);border-radius:var(--r-sm);padding:7px 10px;font-size:12px;font-family:inherit;color:var(--text1);background:var(--surface);outline:none;width:100%;transition:border-color .12s;}
+.finput:focus{border-color:var(--teal);box-shadow:0 0 0 2px rgba(69,218,190,.12);}
+.finput.err{border-color:var(--red);}
+.finput::placeholder{color:var(--text3);}
+.fsel{appearance:none;background-image:url("data:image/svg+xml,%3Csvg width='10' height='6' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%239a9890' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 10px center;padding-right:28px;}
+.fhint{font-size:10px;color:var(--text3);margin-top:2px;}
+.fsep{height:1px;background:var(--border);margin:16px 0;}
+.ftabs{display:flex;gap:2px;margin-bottom:16px;background:var(--surface2);padding:3px;border-radius:var(--r-md);}
+.ftab{flex:1;text-align:center;padding:6px;font-size:12px;font-weight:500;color:var(--text2);cursor:pointer;border-radius:var(--r-sm);transition:all .12s;}
+.ftab.active{background:var(--surface);color:var(--text1);box-shadow:0 1px 3px rgba(0,0,0,.08);}
+/* RANGE PREVIEW */
+.range-preview{background:var(--surface2);border-radius:var(--r-sm);padding:10px 12px;font-size:11px;color:var(--text2);margin-top:8px;}
+.range-preview strong{color:var(--text1);}
+/* ASSIGN MODAL */
+.assign-search{display:flex;align-items:center;gap:8px;border:1px solid var(--border);border-radius:var(--r-sm);padding:7px 10px;margin-bottom:12px;}
+.assign-search input{border:none;outline:none;font-size:12px;font-family:inherit;color:var(--text1);width:100%;}
+.assign-opts{max-height:220px;overflow-y:auto;}
+.assign-opt{display:flex;align-items:center;gap:10px;padding:9px 10px;border-radius:var(--r-sm);cursor:pointer;transition:background .08s;}
+.assign-opt:hover{background:var(--surface2);}
+.assign-opt.sel{background:var(--teal-bg);}
+.assign-opt-id{font-family:'DM Mono',monospace;font-size:11px;font-weight:500;color:var(--text1);min-width:70px;}
+.assign-opt-client{font-size:12px;color:var(--text2);flex:1;}
+.assign-opt-dest{font-size:11px;color:var(--text3);}
+/* TOAST */
+.toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:var(--text1);color:#fff;font-size:12px;font-weight:500;padding:8px 16px;border-radius:var(--r-md);z-index:9999;opacity:0;pointer-events:none;transition:opacity .2s;white-space:nowrap;}
+.toast.show{opacity:1;}
+/* LOADING */
+#loadBar{display:none;position:fixed;top:0;left:0;width:100%;height:3px;background:var(--teal);z-index:9999;animation:ldp 1s ease infinite alternate;}
+@keyframes ldp{from{opacity:.5}to{opacity:1}}
+::-webkit-scrollbar{width:5px;height:5px;}
+::-webkit-scrollbar-thumb{background:var(--border2);border-radius:3px;}
+</style>
+</head>
+<body>
+
+<div id="loadBar"></div>
+
+<nav class="topnav">
+  <a class="logo" href="/">
+    <div class="logo-mark"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7h10M7 2l5 5-5 5" stroke="#45dabe" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+    Flexport Korea
+    <div class="logo-sep"></div>
+    <span class="logo-sub">Air Planning</span>
+  </a>
+  <div class="nav-spacer"></div>
+  <span class="nav-date" id="navDate"></span>
+</nav>
+
+<div class="page">
+  <!-- PAGE HEADER -->
+  <div class="page-hdr">
+    <div>
+      <div class="page-title">MAWB Stock</div>
+      <div class="page-sub" id="pageSubtitle">로딩 중…</div>
+    </div>
+    <div class="page-actions">
+      <button class="btn" onclick="openManageAirlinesModal()" title="항공사 탭 관리">
+        <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><circle cx="6" cy="6" r="4.5" stroke="currentColor" stroke-width="1.3"/><path d="M6 3.5v2.5l1.5 1.5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
+        항공사 관리
+      </button>
+      <button class="btn" onclick="openAddModal()">
+        <svg width="11" height="11" viewBox="0 0 11 11" fill="none"><path d="M5.5 1v9M1 5.5h9" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+        단건 추가
+      </button>
+      <button class="btn teal" onclick="openRangeModal()">
+        <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M1 6h10M6 1l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        범위 추가
+      </button>
+    </div>
+  </div>
+
+  <!-- KPI -->
+  <div class="kpi-grid">
+    <div class="kpi">
+      <div class="kpi-label">전체 Stock</div>
+      <div class="kpi-val" id="kpi-total">—</div>
+      <div class="kpi-sub">등록된 MAWB 번호</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-label">사용 가능</div>
+      <div class="kpi-val green" id="kpi-avail">—</div>
+      <div class="kpi-sub">미배정 번호</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-label">사용 완료</div>
+      <div class="kpi-val" id="kpi-used">—</div>
+      <div class="kpi-sub">배정된 번호</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-label">잔여율</div>
+      <div class="kpi-val amber" id="kpi-rate">—</div>
+      <div class="kpi-sub">사용 가능 비율</div>
+    </div>
+  </div>
+
+  <!-- AIRLINE PILLS -->
+  <div class="airline-bar" id="airlineBar"></div>
+
+  <!-- TOOLBAR -->
+  <div class="toolbar">
+    <div class="search-box">
+      <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><circle cx="5" cy="5" r="3.5" stroke="#9a9890" stroke-width="1.3"/><path d="M8 8l2.5 2.5" stroke="#9a9890" stroke-width="1.3" stroke-linecap="round"/></svg>
+      <input type="text" id="searchInput" placeholder="MAWB 번호, FLEX-ID, Client 검색…" oninput="renderTable()">
+    </div>
+    <div class="airline-select-wrap">
+      <select class="airline-dropdown" id="airlineDropdown" onchange="onAirlineDropdown(this)">
+        <option value="all">항공사 전체</option>
+      </select>
+      <svg width="10" height="6" viewBox="0 0 10 6" fill="none"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+    </div>
+    <div class="filter-group">
+      <div class="filter-chip on" id="fc-all" onclick="setFilter('all',this)">전체</div>
+      <div class="filter-chip" id="fc-avail" onclick="setFilter('avail',this)">사용 가능</div>
+      <div class="filter-chip" id="fc-used" onclick="setFilter('used',this)">사용 완료</div>
+    </div>
+    <div class="tspc"></div>
+    <span id="syncStatus" style="font-size:11px;color:var(--text3);"></span>
+  </div>
+
+  <!-- TABLE -->
+  <div class="tbl-wrap">
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>항공사</th>
+          <th>MAWB 번호</th>
+          <th>상태</th>
+          <th>배정된 Shipment</th>
+          <th>등록일</th>
+          <th style="width:80px;"></th>
+        </tr>
+      </thead>
+      <tbody id="tableBody"></tbody>
+    </table>
+    <div class="empty" id="emptyState" style="display:none;">
+      <div class="empty-icon">📋</div>
+      <div style="font-size:14px;font-weight:500;margin-bottom:4px;">MAWB Stock이 없어요</div>
+      <div style="font-size:12px;">단건 추가 또는 범위 추가로 시작해보세요</div>
+    </div>
+  </div>
+</div>
+
+<!-- 단건 추가 모달 -->
+<div class="overlay" id="addOverlay">
+  <div class="modal">
+    <div class="modal-hdr">
+      <div class="modal-title">MAWB 추가</div>
+      <button class="modal-x" onclick="closeAddModal()">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="fg2">
+        <div class="fg">
+          <label class="flabel">항공사 <span>*</span></label>
+          <select class="finput fsel" id="a-airline">
+            <option value="">선택</option>
+          </select>
+        </div>
+        <div class="fg">
+          <label class="flabel">Prefix <span>*</span></label>
+          <input class="finput mono" id="a-prefix" placeholder="예: 180" maxlength="3">
+          <div class="fhint">항공사 3자리 코드</div>
+        </div>
+      </div>
+      <div class="fg">
+        <label class="flabel">MAWB 번호 <span>*</span></label>
+        <input class="finput mono" id="a-number" placeholder="예: 12345678" maxlength="8">
+        <div class="fhint">8자리 숫자 (prefix 제외)</div>
+      </div>
+      <div class="fg">
+        <label class="flabel">메모</label>
+        <input class="finput" id="a-memo" placeholder="선택 입력">
+      </div>
+    </div>
+    <div class="modal-ftr">
+      <button class="btn" onclick="closeAddModal()">취소</button>
+      <button class="btn primary" onclick="submitAdd()">추가</button>
+    </div>
+  </div>
+</div>
+
+<!-- 범위 추가 모달 -->
+<div class="overlay" id="rangeOverlay">
+  <div class="modal">
+    <div class="modal-hdr">
+      <div class="modal-title">범위 추가</div>
+      <button class="modal-x" onclick="closeRangeModal()">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="fg2">
+        <div class="fg">
+          <label class="flabel">항공사 <span>*</span></label>
+          <select class="finput fsel" id="r-airline">
+            <option value="">선택</option>
+          </select>
+        </div>
+        <div class="fg">
+          <label class="flabel">Prefix <span>*</span></label>
+          <input class="finput mono" id="r-prefix" placeholder="예: 180" maxlength="3">
+        </div>
+      </div>
+      <div class="fg2">
+        <div class="fg">
+          <label class="flabel">시작 번호 <span>*</span></label>
+          <input class="finput mono" id="r-from" placeholder="예: 00001000" maxlength="8" oninput="updateRangePreview()">
+        </div>
+        <div class="fg">
+          <label class="flabel">끝 번호 <span>*</span></label>
+          <input class="finput mono" id="r-to" placeholder="예: 00001099" maxlength="8" oninput="updateRangePreview()">
+        </div>
+      </div>
+      <div class="range-preview" id="rangePreview" style="display:none;"></div>
+      <div class="fg" style="margin-top:12px;">
+        <label class="flabel">메모</label>
+        <input class="finput" id="r-memo" placeholder="선택 입력">
+      </div>
+    </div>
+    <div class="modal-ftr">
+      <button class="btn" onclick="closeRangeModal()">취소</button>
+      <button class="btn primary" onclick="submitRange()">일괄 추가</button>
+    </div>
+  </div>
+</div>
+
+<!-- 배정 모달 -->
+<div class="overlay" id="assignOverlay">
+  <div class="modal">
+    <div class="modal-hdr">
+      <div class="modal-title">Shipment 배정</div>
+      <button class="modal-x" onclick="closeAssignModal()">✕</button>
+    </div>
+    <div class="modal-body">
+      <div style="font-size:12px;color:var(--text2);margin-bottom:12px;">
+        배정할 MAWB: <span class="mono fw5" id="assignMawbLabel"></span>
+      </div>
+      <div class="assign-search">
+        <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><circle cx="5" cy="5" r="3.5" stroke="#9a9890" stroke-width="1.3"/><path d="M8 8l2.5 2.5" stroke="#9a9890" stroke-width="1.3" stroke-linecap="round"/></svg>
+        <input type="text" id="assignSearch" placeholder="FLEX-ID 또는 Client 검색…" oninput="renderAssignOpts()">
+      </div>
+      <div class="assign-opts" id="assignOpts"></div>
+    </div>
+    <div class="modal-ftr">
+      <button class="btn" onclick="closeAssignModal()">취소</button>
+      <button class="btn primary" onclick="confirmAssign()">배정</button>
+    </div>
+  </div>
+</div>
+
+<!-- 항공사 탭 관리 모달 -->
+<div class="overlay" id="manageAirlinesOverlay">
+  <div class="modal">
+    <div class="modal-hdr">
+      <div class="modal-title">항공사 탭 관리</div>
+      <button class="modal-x" onclick="closeManageAirlinesModal()">✕</button>
+    </div>
+    <div class="modal-body">
+      <div style="font-size:11px;color:var(--text3);margin-bottom:12px;">현재 탭에 표시되는 항공사 목록이에요. 드래그로 순서 변경, ✕로 제거 가능해요.</div>
+      <div id="mgAirlineList" style="display:flex;flex-direction:column;gap:6px;margin-bottom:16px;"></div>
+      <div class="fsep"></div>
+      <div style="font-size:11px;font-weight:600;color:var(--text2);margin-bottom:8px;">항공사 추가</div>
+      <div class="fg2">
+        <div class="fg">
+          <label class="flabel">기존 항공사 선택</label>
+          <select class="finput fsel" id="mg-airline"><option value="">선택</option></select>
+        </div>
+        <div style="display:flex;align-items:flex-end;padding-bottom:1px;">
+          <button class="btn" onclick="addAirlineFromSelect()" style="width:100%;">추가</button>
+        </div>
+      </div>
+      <div style="font-size:11px;color:var(--text3);margin:8px 0 10px;">또는 직접 입력</div>
+      <div class="fg2">
+        <div class="fg">
+          <label class="flabel">코드</label>
+          <input class="finput mono" id="mg-code" placeholder="예: AA" maxlength="4">
+        </div>
+        <div class="fg">
+          <label class="flabel">Prefix</label>
+          <input class="finput mono" id="mg-prefix" placeholder="예: 001" maxlength="3">
+        </div>
+      </div>
+      <div class="fg">
+        <label class="flabel">항공사명</label>
+        <input class="finput" id="mg-name" placeholder="예: American Airlines">
+      </div>
+      <button class="btn" onclick="addAirlineManual()" style="width:100%;margin-top:4px;">직접 추가</button>
+    </div>
+    <div class="modal-ftr">
+      <button class="btn" onclick="resetAirlines()">기본값으로 초기화</button>
+      <div style="flex:1;"></div>
+      <button class="btn primary" onclick="closeManageAirlinesModal()">완료</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+'use strict';
+
+var SB_URL = 'https://eoudnajyxjlhommrdfyt.supabase.co';
+var SB_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVvdWRuYWp5eGpsaG9tbXJkZnl0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzk5MzUwMTEsImV4cCI6MjA5NTUxMTAxMX0.aomfjRUYP3J24RW-A14Y4SKy4aSF8yYxdhQJwbWoo6c';
+var HDR = {'Content-Type':'application/json','apikey':SB_KEY,'Authorization':'Bearer '+SB_KEY};
+
+// ── STATE ──
+var stocks = [];        // mawb_stock 테이블
+var shipments = [];     // shipments 테이블 (배정용)
+var filterVal = 'all';
+var airlineFilter = 'all';
+var assigningId = null; // 배정 중인 stock id
+var assignSelectedSid = null;
+
+// ── AIRLINES ──
+// 항공사 목록 — AIRLINES_KEY 로 localStorage에 저장/불러오기
+var DEFAULT_AIRLINES = [
+  {code:'DL', name:'Delta Air Lines', prefix:'006'},
+  {code:'5Y', name:'Atlas Air',       prefix:'369'},
+  {code:'K4', name:'Kalitta Air',     prefix:'936'},
+  {code:'YP', name:'Air Premia',      prefix:'722'},
+];
+var EXTRA_AIRLINES = [
+  {code:'KE', name:'Korean Air',   prefix:'180'},
+  {code:'OZ', name:'Asiana',       prefix:'988'},
+  {code:'NH', name:'ANA',          prefix:'205'},
+  {code:'JL', name:'JAL',          prefix:'131'},
+  {code:'LJ', name:'Jin Air',      prefix:'718'},
+  {code:'AA', name:'American',     prefix:'001'},
+  {code:'UA', name:'United',       prefix:'016'},
+  {code:'LH', name:'Lufthansa',    prefix:'020'},
+  {code:'TK', name:'Turkish',      prefix:'235'},
+  {code:'EK', name:'Emirates',     prefix:'176'},
+  {code:'QR', name:'Qatar',        prefix:'157'},
+  {code:'CX', name:'Cathay',       prefix:'160'},
+  {code:'AC', name:'Air Canada',   prefix:'014'},
+];
+
+function loadAirlines() {
+  var saved = localStorage.getItem('flx_airlines');
+  if (saved) {
+    try { return JSON.parse(saved); } catch(e) {}
+  }
+  return DEFAULT_AIRLINES.slice();
+}
+function saveAirlines(list) {
+  localStorage.setItem('flx_airlines', JSON.stringify(list));
+}
+var AIRLINES = loadAirlines();
+
+function getAirlineExtra(code) {
+  return EXTRA_AIRLINES.find(function(a){ return a.code === code; });
+}
+
+function getAirline(prefix) {
+  return AIRLINES.find(function(a){ return a.prefix === prefix; })
+      || EXTRA_AIRLINES.find(function(a){ return a.prefix === prefix; })
+      || {code:prefix, name:prefix};
+}
+
+// ── SUPABASE HELPERS ──
+async function sbGet(path) {
+  var res = await fetch(SB_URL+'/rest/v1/'+path, {headers:Object.assign({'Prefer':'return=representation'},HDR)});
+  if (!res.ok) throw new Error(await res.text());
+  return res.json();
+}
+async function sbPost(table, body) {
+  var res = await fetch(SB_URL+'/rest/v1/'+table, {method:'POST', headers:Object.assign({'Prefer':'return=minimal'},HDR), body:JSON.stringify(body)});
+  if (!res.ok) throw new Error(await res.text());
+}
+async function sbPatch(table, id, body) {
+  var res = await fetch(SB_URL+'/rest/v1/'+table+'?id=eq.'+id, {method:'PATCH', headers:Object.assign({'Prefer':'return=minimal'},HDR), body:JSON.stringify(body)});
+  if (!res.ok) throw new Error(await res.text());
+}
+async function sbDelete(table, id) {
+  var res = await fetch(SB_URL+'/rest/v1/'+table+'?id=eq.'+id, {method:'DELETE', headers:HDR});
+  if (!res.ok) throw new Error(await res.text());
+}
+
+function uid() { return Date.now().toString(36)+Math.random().toString(36).slice(2,5); }
+function setLoad(on) { document.getElementById('loadBar').style.display = on ? 'block' : 'none'; }
+
+
+// ── AIRLINE MANAGEMENT ──
+function openManageAirlinesModal() {
+  populateAirlineSelects();
+  renderMgList();
+  document.getElementById('mg-code').value = '';
+  document.getElementById('mg-prefix').value = '';
+  document.getElementById('mg-name').value = '';
+  document.getElementById('manageAirlinesOverlay').classList.add('open');
+}
+function closeManageAirlinesModal() {
+  document.getElementById('manageAirlinesOverlay').classList.remove('open');
+  renderAirlines(); // refresh pills
+}
+
+function renderMgList() {
+  var list = document.getElementById('mgAirlineList');
+  if (!list) return;
+  list.innerHTML = AIRLINES.map(function(a, i) {
+    return '<div style="display:flex;align-items:center;gap:8px;background:var(--surface2);border:1px solid var(--border);border-radius:var(--r-sm);padding:8px 12px;">'
+      + '<span class="mono fw5" style="font-size:12px;min-width:36px;">'+a.code+'</span>'
+      + '<span style="font-size:12px;color:var(--text2);flex:1;">'+a.name+'</span>'
+      + '<span class="mono" style="font-size:11px;color:var(--text3);">'+a.prefix+'</span>'
+      + '<button onclick="removeAirline('+i+')" style="border:none;background:none;cursor:pointer;color:var(--text3);font-size:14px;padding:0 2px;line-height:1;" title="제거">✕</button>'
+      + '</div>';
+  }).join('');
+}
+
+function removeAirline(idx) {
+  AIRLINES.splice(idx, 1);
+  saveAirlines(AIRLINES);
+  renderMgList();
+}
+
+function addAirlineFromSelect() {
+  var sel = document.getElementById('mg-airline');
+  var code = sel.value;
+  if (!code) { showToast('항공사를 선택해주세요', true); return; }
+  var al = AIRLINES.find(function(a){ return a.code===code; });
+  if (al) { showToast('이미 추가된 항공사예요', true); return; }
+  var found = EXTRA_AIRLINES.find(function(a){ return a.code===code; })
+           || DEFAULT_AIRLINES.find(function(a){ return a.code===code; });
+  if (!found) { showToast('항공사 정보를 찾을 수 없어요', true); return; }
+  AIRLINES.push(found);
+  saveAirlines(AIRLINES);
+  renderMgList();
+  showToast(found.code+' 추가됨 ✓');
+}
+
+function addAirlineManual() {
+  var code   = document.getElementById('mg-code').value.trim().toUpperCase();
+  var prefix = document.getElementById('mg-prefix').value.trim();
+  var name   = document.getElementById('mg-name').value.trim();
+  if (!code||!prefix||!name) { showToast('코드, Prefix, 항공사명 모두 입력해주세요', true); return; }
+  if (AIRLINES.find(function(a){ return a.code===code; })) { showToast('이미 있는 코드예요', true); return; }
+  var newAl = {code:code, name:name, prefix:prefix};
+  AIRLINES.push(newAl);
+  saveAirlines(AIRLINES);
+  // Also add to EXTRA_AIRLINES for getAirline lookup
+  if (!EXTRA_AIRLINES.find(function(a){ return a.code===code; })) {
+    EXTRA_AIRLINES.push(newAl);
+  }
+  document.getElementById('mg-code').value = '';
+  document.getElementById('mg-prefix').value = '';
+  document.getElementById('mg-name').value = '';
+  renderMgList();
+  showToast(code+' 추가됨 ✓');
+}
+
+function resetAirlines() {
+  if (!confirm('기본값(DL/5Y/K4/YP)으로 초기화할까요?')) return;
+  AIRLINES = DEFAULT_AIRLINES.slice();
+  saveAirlines(AIRLINES);
+  renderMgList();
+  showToast('초기화됨');
+}
+
+// ── LOAD ──
+async function loadAll() {
+  setLoad(true);
+  var syncEl = document.getElementById('syncStatus');
+  if (syncEl) syncEl.textContent = '⟳ 동기화 중…';
+  try {
+    var sRows = await sbGet('mawb_stock?order=created_at.asc');
+    stocks = sRows || [];
+    // Load shipments for assignment (only new/scheduled, no mawb yet or unassigned)
+    var shRows = await sbGet('shipments?select=id,flex_id,client,dest,status,mawb&order=created_at.desc');
+    shipments = (shRows || []).map(function(r){
+      return {id:r.id, flexId:r.flex_id, client:r.client, dest:r.dest, status:r.status, mawb:r.mawb};
+    });
+    renderKPIs();
+    renderAirlines();
+    renderTable();
+    var now = new Date().toLocaleTimeString('ko-KR',{hour:'2-digit',minute:'2-digit'});
+    if (syncEl) syncEl.textContent = '✓ '+now+' 동기화됨';
+    document.getElementById('pageSubtitle').textContent =
+      '총 '+stocks.length+'개 · 사용 가능 '+stocks.filter(function(s){return !s.used;}).length+'개';
+  } catch(e) {
+    showToast('로드 실패: '+e.message, true);
+    if (syncEl) syncEl.textContent = '⚠ 연결 실패';
+  } finally { setLoad(false); }
+}
+
+// ── KPIs ──
+function renderKPIs() {
+  var total = stocks.length;
+  var avail = stocks.filter(function(s){return !s.used;}).length;
+  var used  = total - avail;
+  var rate  = total ? Math.round(avail/total*100) : 0;
+  document.getElementById('kpi-total').textContent = total.toLocaleString();
+  document.getElementById('kpi-avail').textContent = avail.toLocaleString();
+  document.getElementById('kpi-used').textContent  = used.toLocaleString();
+  var rateEl = document.getElementById('kpi-rate');
+  rateEl.textContent = rate + '%';
+  rateEl.className = 'kpi-val ' + (rate > 50 ? 'green' : rate > 20 ? 'amber' : 'red');
+}
+
+// ── AIRLINE PILLS ──
+function renderAirlines() {
+  var bar = document.getElementById('airlineBar');
+  // Count by prefix
+  var byPrefix = {};
+  stocks.forEach(function(s) {
+    if (!byPrefix[s.prefix]) byPrefix[s.prefix] = {total:0, avail:0};
+    byPrefix[s.prefix].total++;
+    if (!s.used) byPrefix[s.prefix].avail++;
+  });
+  var prefixes = Object.keys(byPrefix);
+  var h = '<div class="airline-pill '+(airlineFilter==='all'?'active':'')+'" onclick="setAirline(\'all\',this)">'
+    + '<span class="airline-pill-code">전체</span>'
+    + '<div class="airline-pill-counts">'
+    + '<span class="ap-avail">'+stocks.filter(function(s){return !s.used;}).length+'</span>'
+    + '<span class="ap-used">'+stocks.filter(function(s){return s.used;}).length+'</span>'
+    + '</div></div>';
+  prefixes.forEach(function(pfx) {
+    var al = getAirline(pfx);
+    var cnt = byPrefix[pfx];
+    h += '<div class="airline-pill '+(airlineFilter===pfx?'active':'')+'" onclick="setAirline(\''+pfx+'\',this)">'
+      + '<span class="airline-pill-code">'+pfx+'</span>'
+      + '<span style="font-size:11px;color:var(--text2);">'+al.code+'</span>'
+      + '<div class="airline-pill-counts">'
+      + '<span class="ap-avail">'+cnt.avail+'</span>'
+      + '<span class="ap-used">'+(cnt.total-cnt.avail)+'</span>'
+      + '</div></div>';
+  });
+  bar.innerHTML = h;
+  updateAirlineDropdown();
+}
+
+function setAirline(val, btn) {
+  airlineFilter = val;
+  document.querySelectorAll('.airline-pill').forEach(function(p){ p.classList.remove('active'); });
+  btn.classList.add('active');
+  syncAirlineDropdown();
+  renderTable();
+}
+
+function onAirlineDropdown(sel) {
+  airlineFilter = sel.value;
+  // sync pills
+  document.querySelectorAll('.airline-pill').forEach(function(p){ p.classList.remove('active'); });
+  var matchPill = Array.from(document.querySelectorAll('.airline-pill')).find(function(p){
+    return p.getAttribute('onclick') && p.getAttribute('onclick').indexOf("'"+airlineFilter+"'") !== -1;
+  });
+  if (matchPill) matchPill.classList.add('active');
+  sel.classList.toggle('on', airlineFilter !== 'all');
+  renderTable();
+}
+
+function syncAirlineDropdown() {
+  var sel = document.getElementById('airlineDropdown');
+  if (!sel) return;
+  sel.value = airlineFilter;
+  sel.classList.toggle('on', airlineFilter !== 'all');
+}
+
+function updateAirlineDropdown() {
+  var sel = document.getElementById('airlineDropdown');
+  if (!sel) return;
+  // Count by prefix in stocks
+  var byPrefix = {};
+  stocks.forEach(function(s) {
+    if (!byPrefix[s.prefix]) byPrefix[s.prefix] = {total:0, avail:0};
+    byPrefix[s.prefix].total++;
+    if (!s.used) byPrefix[s.prefix].avail++;
+  });
+  var opts = '<option value="all">항공사 전체</option>';
+  // Show AIRLINES first
+  AIRLINES.forEach(function(a) {
+    var cnt = byPrefix[a.prefix];
+    var label = a.code + ' · ' + a.name + (cnt ? ' ('+cnt.avail+'/'+cnt.total+')' : '');
+    opts += '<option value="'+a.prefix+'">'+label+'</option>';
+  });
+  // Show any other prefixes in stock not in AIRLINES
+  Object.keys(byPrefix).forEach(function(pfx) {
+    var inList = AIRLINES.find(function(a){ return a.prefix === pfx; });
+    if (!inList) {
+      var al = getAirline(pfx);
+      var cnt = byPrefix[pfx];
+      opts += '<option value="'+pfx+'">'+al.code+' ('+cnt.avail+'/'+cnt.total+')</option>';
+    }
+  });
+  sel.innerHTML = opts;
+  sel.value = airlineFilter;
+  sel.classList.toggle('on', airlineFilter !== 'all');
+}
+
+// ── FILTER CHIPS ──
+function setFilter(val, btn) {
+  filterVal = val;
+  document.querySelectorAll('.filter-chip').forEach(function(c){ c.classList.remove('on'); });
+  btn.classList.add('on');
+  renderTable();
+}
+
+// ── RENDER TABLE ──
+function renderTable() {
+  var q = (document.getElementById('searchInput').value || '').toLowerCase();
+  var tbody = document.getElementById('tableBody');
+  var emptyEl = document.getElementById('emptyState');
+
+  var filtered = stocks.filter(function(s) {
+    if (airlineFilter !== 'all' && s.prefix !== airlineFilter) return false;
+    if (filterVal === 'avail' && s.used) return false;
+    if (filterVal === 'used' && !s.used) return false;
+    if (q) {
+      var hay = [s.prefix, s.number, s.flex_id||'', s.client||''].join(' ').toLowerCase();
+      if (hay.indexOf(q) === -1) return false;
+    }
+    return true;
+  });
+
+  if (filtered.length === 0) {
+    tbody.innerHTML = '';
+    emptyEl.style.display = 'block';
+    return;
+  }
+  emptyEl.style.display = 'none';
+
+  var rows = '';
+  filtered.forEach(function(s) {
+    var al = getAirline(s.prefix);
+    var mawbFmt = s.prefix + '-' + (s.number||'');
+    var statusBadge = s.used
+      ? '<span class="badge badge-used"><span class="badge-dot"></span>사용 완료</span>'
+      : '<span class="badge badge-avail"><span class="badge-dot"></span>사용 가능</span>';
+    var assignCell = '';
+    if (s.used && s.flex_id) {
+      assignCell = '<div class="assign-chip"><span class="flex-id">'+esc(s.flex_id)+'</span><span class="client">'+esc(s.client||'')+'</span></div>';
+    } else if (!s.used) {
+      assignCell = '<button class="assign-btn" onclick="openAssignModal(\''+s.id+'\',\''+mawbFmt+'\')">+ Shipment 배정</button>';
+    }
+    var createdDate = s.created_at ? new Date(s.created_at).toLocaleDateString('ko-KR',{month:'numeric',day:'numeric'}) : '—';
+    var memo = s.memo ? '<div style="font-size:10px;color:var(--text3);margin-top:2px;">'+esc(s.memo)+'</div>' : '';
+    rows += '<tr class="'+(s.used?'used':'')+'">'
+      + '<td><div style="font-weight:500;">'+al.code+'</div><div style="font-size:10px;color:var(--text3);">'+al.name+'</div></td>'
+      + '<td><div class="mono fw5">'+mawbFmt+'</div>'+memo+'</td>'
+      + '<td>'+statusBadge+'</td>'
+      + '<td>'+assignCell+'</td>'
+      + '<td style="color:var(--text3);font-size:11px;">'+createdDate+'</td>'
+      + '<td style="text-align:right;">'
+      + (s.used ? '<button class="btn sm" onclick="unassign(\''+s.id+'\')">배정 해제</button>' : '')
+      + ' <button class="btn sm danger" onclick="deleteStock(\''+s.id+'\')">삭제</button>'
+      + '</td>'
+      + '</tr>';
+  });
+  tbody.innerHTML = rows;
+}
+
+// ── ADD MODAL ──
+function openAddModal() {
+  populateAirlineSelects();
+  document.getElementById('a-airline').value = '';
+  document.getElementById('a-prefix').value = '';
+  document.getElementById('a-number').value = '';
+  document.getElementById('a-memo').value = '';
+  // Sync prefix when airline changes
+  var alSel = document.getElementById('a-airline');
+  alSel.onchange = function() {
+    var al = AIRLINES.find(function(a){return a.code===alSel.value;});
+    if (al) document.getElementById('a-prefix').value = al.prefix;
+  };
+  document.getElementById('addOverlay').classList.add('open');
+  setTimeout(function(){ document.getElementById('a-airline').focus(); }, 50);
+}
+function closeAddModal() { document.getElementById('addOverlay').classList.remove('open'); }
+
+async function submitAdd() {
+  var airline = document.getElementById('a-airline').value;
+  var prefix = document.getElementById('a-prefix').value.trim();
+  var number = document.getElementById('a-number').value.trim();
+  var memo   = document.getElementById('a-memo').value.trim();
+  if (!prefix || prefix.length !== 3) { markErr('a-prefix','Prefix는 3자리'); return; }
+  if (!number || !/^\d{8}$/.test(number)) { markErr('a-number','번호는 8자리 숫자'); return; }
+  // Check duplicate
+  if (stocks.find(function(s){ return s.prefix===prefix && s.number===number; })) {
+    showToast(prefix+'-'+number+' 이미 등록된 번호예요', true); return;
+  }
+  setLoad(true);
+  try {
+    await sbPost('mawb_stock', {id:uid(), prefix:prefix, number:number, airline:airline, used:false, memo:memo});
+    closeAddModal();
+    await loadAll();
+    showToast(prefix+'-'+number+' 추가됨 ✓');
+  } catch(e) { showToast('추가 실패: '+e.message, true); }
+  finally { setLoad(false); }
+}
+
+// ── RANGE MODAL ──
+function openRangeModal() {
+  populateAirlineSelects();
+  document.getElementById('r-airline').value = '';
+  document.getElementById('r-prefix').value = '';
+  document.getElementById('r-from').value = '';
+  document.getElementById('r-to').value = '';
+  document.getElementById('r-memo').value = '';
+  document.getElementById('rangePreview').style.display = 'none';
+  var alSel = document.getElementById('r-airline');
+  alSel.onchange = function() {
+    var al = AIRLINES.find(function(a){return a.code===alSel.value;});
+    if (al) { document.getElementById('r-prefix').value = al.prefix; updateRangePreview(); }
+  };
+  document.getElementById('rangeOverlay').classList.add('open');
+}
+function closeRangeModal() { document.getElementById('rangeOverlay').classList.remove('open'); }
+
+function updateRangePreview() {
+  var from = document.getElementById('r-from').value.trim();
+  var to   = document.getElementById('r-to').value.trim();
+  var pfx  = document.getElementById('r-prefix').value.trim();
+  var prev = document.getElementById('rangePreview');
+  if (!from || !to || !pfx) { prev.style.display='none'; return; }
+  var fromN = parseInt(from,10);
+  var toN   = parseInt(to,10);
+  if (isNaN(fromN)||isNaN(toN)||toN<fromN) { prev.style.display='none'; return; }
+  var count = toN - fromN + 1;
+  prev.style.display = 'block';
+  prev.innerHTML = '<strong>'+count+'개</strong> 생성 예정 · '
+    + pfx+'-'+String(fromN).padStart(8,'0')+' ~ '+pfx+'-'+String(toN).padStart(8,'0');
+  if (count > 500) prev.innerHTML += ' <span style="color:var(--red);">⚠ 500개 초과 불가</span>';
+}
+
+async function submitRange() {
+  var airline = document.getElementById('r-airline').value;
+  var prefix  = document.getElementById('r-prefix').value.trim();
+  var from    = document.getElementById('r-from').value.trim();
+  var to      = document.getElementById('r-to').value.trim();
+  var memo    = document.getElementById('r-memo').value.trim();
+  if (!prefix||prefix.length!==3) { markErr('r-prefix','Prefix는 3자리'); return; }
+  if (!from||!to) { showToast('시작/끝 번호를 입력하세요', true); return; }
+  var fromN = parseInt(from,10);
+  var toN   = parseInt(to,10);
+  if (isNaN(fromN)||isNaN(toN)||toN<fromN) { showToast('번호 범위가 잘못됐어요', true); return; }
+  var count = toN - fromN + 1;
+  if (count > 500) { showToast('한 번에 최대 500개까지 추가 가능해요', true); return; }
+  setLoad(true);
+  try {
+    var rows = [];
+    for (var n = fromN; n <= toN; n++) {
+      var numStr = String(n).padStart(8,'0');
+      if (!stocks.find(function(s){return s.prefix===prefix&&s.number===numStr;})) {
+        rows.push({id:uid(), prefix:prefix, number:numStr, airline:airline, used:false, memo:memo});
+      }
+    }
+    // Insert in batches of 100
+    for (var i=0; i<rows.length; i+=100) {
+      await sbPost('mawb_stock', rows.slice(i,i+100));
+    }
+    closeRangeModal();
+    await loadAll();
+    showToast(rows.length+'개 추가됨 ✓');
+  } catch(e) { showToast('추가 실패: '+e.message, true); }
+  finally { setLoad(false); }
+}
+
+// ── ASSIGN MODAL ──
+function openAssignModal(stockId, mawbLabel) {
+  assigningId = stockId;
+  assignSelectedSid = null;
+  document.getElementById('assignMawbLabel').textContent = mawbLabel;
+  document.getElementById('assignSearch').value = '';
+  renderAssignOpts();
+  document.getElementById('assignOverlay').classList.add('open');
+  setTimeout(function(){ document.getElementById('assignSearch').focus(); }, 50);
+}
+function closeAssignModal() { document.getElementById('assignOverlay').classList.remove('open'); assigningId=null; }
+
+function renderAssignOpts() {
+  var q = (document.getElementById('assignSearch').value||'').toLowerCase();
+  // Show shipments with no mawb assigned
+  var opts = shipments.filter(function(s) {
+    if (s.mawb) return false; // already has mawb
+    if (q) {
+      var hay = [(s.flexId||''),(s.client||''),(s.dest||'')].join(' ').toLowerCase();
+      return hay.indexOf(q) !== -1;
+    }
+    return true;
+  });
+  var el = document.getElementById('assignOpts');
+  if (opts.length === 0) {
+    el.innerHTML = '<div style="padding:20px;text-align:center;color:var(--text3);font-size:12px;">MAWB 미배정 Shipment가 없어요</div>';
+    return;
+  }
+  el.innerHTML = opts.map(function(s) {
+    var isSel = assignSelectedSid === s.id;
+    return '<div class="assign-opt'+(isSel?' sel':'')+'" onclick="selectAssignOpt(\''+s.id+'\')">'
+      + '<div class="assign-opt-id">'+(s.flexId||'TBA')+'</div>'
+      + '<div class="assign-opt-client">'+(s.client||'—')+'</div>'
+      + '<div class="assign-opt-dest">'+(s.dest||'')+'</div>'
+      + '</div>';
+  }).join('');
+}
+
+function selectAssignOpt(sid) {
+  assignSelectedSid = sid;
+  renderAssignOpts();
+}
+
+async function confirmAssign() {
+  if (!assigningId || !assignSelectedSid) { showToast('Shipment를 선택해주세요', true); return; }
+  var stock   = stocks.find(function(s){return s.id===assigningId;});
+  var ship    = shipments.find(function(s){return s.id===assignSelectedSid;});
+  if (!stock||!ship) return;
+  var mawb = stock.prefix+' '+stock.number.slice(0,4)+' '+stock.number.slice(4);
+  setLoad(true);
+  try {
+    // Update mawb_stock → used
+    await sbPatch('mawb_stock', assigningId, {
+      used: true, flex_id: ship.flexId, client: ship.client,
+      assigned_at: new Date().toISOString()
+    });
+    // Update shipment → mawb
+    await sbPatch('shipments', assignSelectedSid, {
+      mawb: mawb,
+      plan_data: Object.assign({}, ship.planData||{}, {mawb: mawb})
+    });
+    closeAssignModal();
+    await loadAll();
+    showToast(mawb+' → '+ship.flexId+' 배정 완료 ✓');
+  } catch(e) { showToast('배정 실패: '+e.message, true); }
+  finally { setLoad(false); }
+}
+
+// ── UNASSIGN ──
+async function unassign(stockId) {
+  if (!confirm('배정을 해제할까요? Shipment의 MAWB도 삭제됩니다.')) return;
+  var stock = stocks.find(function(s){return s.id===stockId;});
+  if (!stock) return;
+  setLoad(true);
+  try {
+    // Find shipment by flex_id and clear mawb
+    var ship = shipments.find(function(s){return s.flexId===stock.flex_id;});
+    if (ship) await sbPatch('shipments', ship.id, {mawb:''});
+    await sbPatch('mawb_stock', stockId, {used:false, flex_id:null, client:null, assigned_at:null});
+    await loadAll();
+    showToast('배정 해제됨');
+  } catch(e) { showToast('해제 실패: '+e.message, true); }
+  finally { setLoad(false); }
+}
+
+// ── DELETE ──
+async function deleteStock(stockId) {
+  if (!confirm('이 MAWB를 삭제할까요?')) return;
+  setLoad(true);
+  try {
+    await sbDelete('mawb_stock', stockId);
+    stocks = stocks.filter(function(s){return s.id!==stockId;});
+    renderKPIs(); renderAirlines(); renderTable();
+    showToast('삭제됨');
+  } catch(e) { showToast('삭제 실패: '+e.message, true); }
+  finally { setLoad(false); }
+}
+
+// ── UTILS ──
+function populateAirlineSelects() {
+  var allForSelect = AIRLINES.concat(EXTRA_AIRLINES.filter(function(e){
+    return !AIRLINES.find(function(a){ return a.code === e.code; });
+  }));
+  var mainGroup = '<optgroup label="주요 항공사">'
+    + AIRLINES.map(function(a){ return '<option value="'+a.code+'">'+a.code+' · '+a.name+'</option>'; }).join('')
+    + '</optgroup>';
+  var extraGroup = '<optgroup label="기타">'
+    + EXTRA_AIRLINES.filter(function(e){ return !AIRLINES.find(function(a){ return a.code===e.code; }); })
+      .map(function(a){ return '<option value="'+a.code+'">'+a.code+' · '+a.name+'</option>'; }).join('')
+    + '</optgroup>';
+  var opts = '<option value="">선택</option>' + mainGroup + extraGroup;
+  document.getElementById('a-airline').innerHTML = opts;
+  document.getElementById('r-airline').innerHTML = opts;
+  if (document.getElementById('mg-airline')) {
+    document.getElementById('mg-airline').innerHTML = opts;
+  }
+}
+
+function markErr(id, msg) {
+  var el = document.getElementById(id);
+  if (el) { el.classList.add('err'); el.focus(); el.addEventListener('input',function(){el.classList.remove('err');},{once:true}); }
+  showToast(msg, true);
+}
+
+function esc(str) {
+  return String(str||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+var _toastTimer;
+function showToast(msg, isErr) {
+  var el = document.getElementById('toast');
+  el.textContent = msg;
+  el.style.background = isErr ? 'var(--red)' : 'var(--text1)';
+  el.classList.add('show');
+  clearTimeout(_toastTimer);
+  _toastTimer = setTimeout(function(){ el.classList.remove('show'); }, 2500);
+}
+
+// ── OVERLAY CLOSE ──
+['addOverlay','rangeOverlay','assignOverlay','manageAirlinesOverlay'].forEach(function(id){
+  document.getElementById(id).addEventListener('click', function(e){
+    if (e.target===this) this.classList.remove('open');
+  });
+});
+
+// ── NAV DATE ──
+document.getElementById('navDate').textContent =
+  new Date().toLocaleDateString('ko-KR',{year:'numeric',month:'long',day:'numeric',weekday:'short'});
+
+// ── INIT ──
+// Create table if doesn't exist — handled via SQL
+loadAll();
+setInterval(function(){
+  var anyOpen = ['addOverlay','rangeOverlay','assignOverlay'].some(function(id){
+    return document.getElementById(id).classList.contains('open');
+  });
+  if (!anyOpen) loadAll();
+}, 30000);
+</script>
+</body>
+</html>
