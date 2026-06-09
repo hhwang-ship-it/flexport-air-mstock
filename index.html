@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>MAWB Stock — Flexport Air</title>
+<title>MAWB Stock — Korea Air Team</title>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 :root {
@@ -20,15 +20,13 @@
 *{box-sizing:border-box;margin:0;padding:0;}
 html,body{height:100%;font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text1);font-size:13px;line-height:1.5;}
 /* NAV */
-.topnav{height:52px;background:var(--surface);border-bottom:1px solid var(--border);display:flex;align-items:center;padding:0 20px;gap:12px;position:sticky;top:0;z-index:100;}
-.logo{display:flex;align-items:center;gap:8px;font-size:14px;font-weight:600;text-decoration:none;color:var(--text1);}
-.logo-mark{width:26px;height:26px;border-radius:8px;background:var(--text1);display:flex;align-items:center;justify-content:center;}
-.logo-sep{width:1px;height:18px;background:var(--border);margin:0 2px;}
-.logo-sub{font-size:12px;font-weight:400;color:var(--text3);}
-.nav-back{font-size:12px;color:var(--text2);text-decoration:none;display:flex;align-items:center;gap:4px;padding:4px 8px;border-radius:var(--r-sm);transition:background .12s;}
-.nav-back:hover{background:var(--surface2);}
+.topnav{height:52px;background:var(--surface);border-bottom:1px solid var(--border);display:flex;align-items:center;padding:0 24px;gap:12px;position:sticky;top:0;z-index:100;}
+.logo{display:flex;align-items:center;gap:10px;font-size:15px;font-weight:700;color:var(--text1);letter-spacing:-.02em;}
+.logo-sep{width:1px;height:18px;background:var(--border);margin:0 6px;}
+.logo-sub{font-size:13px;font-weight:400;color:var(--text2);letter-spacing:0;}
 .nav-spacer{flex:1;}
-.nav-date{font-size:11px;color:var(--text3);}
+.nav-date{font-size:12px;color:var(--text2);font-weight:400;}
+
 /* PAGE */
 .page{max-width:1200px;margin:0 auto;padding:24px 24px 60px;}
 .page-hdr{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:24px;gap:16px;}
@@ -36,7 +34,7 @@ html,body{height:100%;font-family:'DM Sans',sans-serif;background:var(--bg);colo
 .page-sub{font-size:12px;color:var(--text3);margin-top:3px;}
 .page-actions{display:flex;gap:8px;flex-shrink:0;}
 /* KPI CARDS */
-.kpi-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:24px;}
+.kpi-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-bottom:24px;}
 .kpi{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-lg);padding:16px 18px;}
 .kpi-label{font-size:11px;font-weight:600;color:var(--text3);letter-spacing:.04em;text-transform:uppercase;margin-bottom:8px;}
 .kpi-val{font-size:28px;font-weight:600;letter-spacing:-.02em;font-family:'DM Mono',monospace;}
@@ -93,16 +91,27 @@ html,body{height:100%;font-family:'DM Sans',sans-serif;background:var(--bg);colo
 .badge-avail{background:var(--teal-bg);color:var(--teal-dark);}
 .badge-used{background:var(--surface2);color:var(--text3);border:1px solid var(--border);}
 .badge-low{background:var(--amber-bg);color:var(--amber);}
+.badge-void{background:#f3f0ff;color:#6b46c1;border:1px solid #d9d0ff;}
 .badge-dot{width:5px;height:5px;border-radius:50%;background:currentColor;}
 /* ASSIGN CHIP */
-.assign-chip{display:inline-flex;align-items:center;gap:5px;background:var(--surface2);border:1px solid var(--border);border-radius:var(--r-sm);padding:3px 8px;font-size:11px;}
-.assign-chip .flex-id{font-family:'DM Mono',monospace;font-weight:500;color:var(--text1);}
-.assign-chip .client{color:var(--text2);}
+.assign-chips{display:flex;flex-wrap:wrap;gap:4px;}
+.assign-chip{display:inline-flex;align-items:center;gap:5px;background:var(--teal-bg);border:1px solid var(--teal);border-radius:20px;padding:2px 8px;font-size:11px;}
+.assign-chip .flex-id{font-family:'DM Mono',monospace;font-weight:600;color:var(--teal-dark);}
+.assign-chip .client{color:var(--teal-dark);opacity:.8;}
+.assign-chip-x{border:none;background:none;cursor:pointer;color:var(--teal-dark);font-size:12px;padding:0 0 0 2px;line-height:1;opacity:.6;}
+.assign-chip-x:hover{opacity:1;}
+.assign-opt-check-multi{width:14px;height:14px;border-radius:3px;border:1.5px solid var(--border2);flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:9px;}
+.assign-opt.sel .assign-opt-check-multi{background:var(--teal);border-color:var(--teal);color:#fff;}
 /* ASSIGN BUTTON */
 .assign-btn{font-size:11px;font-weight:500;padding:3px 10px;border-radius:var(--r-sm);border:1px dashed var(--border2);background:none;color:var(--text3);cursor:pointer;font-family:inherit;transition:all .12s;}
 .assign-btn:hover{border-color:var(--teal);color:var(--teal-dark);background:var(--teal-bg);}
 /* EMPTY */
 .empty{text-align:center;padding:48px 24px;color:var(--text3);}
+.bulk-bar{display:none;align-items:center;gap:10px;padding:8px 16px;background:var(--teal-bg);border:1px solid var(--teal);border-radius:var(--r-md);margin-bottom:10px;animation:slideUp .15s ease;}
+.bulk-bar.show{display:flex;}
+.bulk-bar-count{font-size:12px;font-weight:600;color:var(--teal-dark);}
+.row-cb{accent-color:var(--teal);cursor:pointer;width:14px;height:14px;}
+.th-cb{width:36px;padding-left:14px !important;}
 .empty-icon{font-size:32px;margin-bottom:8px;opacity:.4;}
 /* MODAL */
 .overlay{position:fixed;inset:0;background:rgba(0,0,0,.35);z-index:200;display:none;align-items:center;justify-content:center;}
@@ -158,12 +167,12 @@ html,body{height:100%;font-family:'DM Sans',sans-serif;background:var(--bg);colo
 <div id="loadBar"></div>
 
 <nav class="topnav">
-  <a class="logo" href="/">
-    <div class="logo-mark"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7h10M7 2l5 5-5 5" stroke="#45dabe" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-    Flexport Korea
+  <div class="logo">
+    <img src="data:image/png;base64,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" alt="Flexport" style="height:22px;display:block;">
+    <span id="logo-fallback" style="display:none;font-size:18px;font-weight:800;letter-spacing:-.03em;color:#0a2540;">flexport</span>
     <div class="logo-sep"></div>
-    <span class="logo-sub">Air Planning</span>
-  </a>
+    <a href="https://flexport-air-planning.vercel.app/" style="font-size:13px;font-weight:400;color:var(--text2);text-decoration:none;transition:color .12s;" onmouseover="this.style.color='var(--teal-dark)'" onmouseout="this.style.color='var(--text2)'">Korea Air Team</a><span style="color:var(--text3);margin:0 2px;">—</span><span style="font-size:13px;font-weight:400;color:var(--text3);">MAWB Stock</span>
+  </div>
   <div class="nav-spacer"></div>
   <span class="nav-date" id="navDate"></span>
 </nav>
@@ -209,6 +218,11 @@ html,body{height:100%;font-family:'DM Sans',sans-serif;background:var(--bg);colo
       <div class="kpi-sub">배정된 번호</div>
     </div>
     <div class="kpi">
+      <div class="kpi-label">Void</div>
+      <div class="kpi-val" id="kpi-void" style="color:#6b46c1;">—</div>
+      <div class="kpi-sub">사용 불가 처리</div>
+    </div>
+    <div class="kpi">
       <div class="kpi-label">잔여율</div>
       <div class="kpi-val amber" id="kpi-rate">—</div>
       <div class="kpi-sub">사용 가능 비율</div>
@@ -234,9 +248,19 @@ html,body{height:100%;font-family:'DM Sans',sans-serif;background:var(--bg);colo
       <div class="filter-chip on" id="fc-all" onclick="setFilter('all',this)">전체</div>
       <div class="filter-chip" id="fc-avail" onclick="setFilter('avail',this)">사용 가능</div>
       <div class="filter-chip" id="fc-used" onclick="setFilter('used',this)">사용 완료</div>
+      <div class="filter-chip" id="fc-void" onclick="setFilter('void',this)">Void</div>
     </div>
     <div class="tspc"></div>
     <span id="syncStatus" style="font-size:11px;color:var(--text3);"></span>
+  </div>
+
+  <!-- BULK ACTION BAR -->
+  <div class="bulk-bar" id="bulkBar">
+    <span class="bulk-bar-count" id="bulkCount">0개 선택됨</span>
+    <button class="btn sm" onclick="bulkVoid()" style="color:#6b46c1;border-color:#d9d0ff;">Void 처리</button>
+    <button class="btn sm danger" onclick="bulkDelete()">Delete</button>
+    <div style="flex:1;"></div>
+    <button class="btn sm" onclick="clearSelection()">선택 해제</button>
   </div>
 
   <!-- TABLE -->
@@ -244,12 +268,14 @@ html,body{height:100%;font-family:'DM Sans',sans-serif;background:var(--bg);colo
     <table class="data-table">
       <thead>
         <tr>
-          <th>항공사</th>
+          <th class="th-cb"><input type="checkbox" class="row-cb" id="cbAll" onclick="toggleAllCb(this)"></th>
+          <th style="width:110px;">항공사</th>
+          <th style="width:60px;">2 Code</th>
           <th>MAWB 번호</th>
           <th>상태</th>
           <th>배정된 Shipment</th>
-          <th>등록일</th>
-          <th style="width:80px;"></th>
+          <th style="width:60px;">등록일</th>
+          <th style="width:160px;"></th>
         </tr>
       </thead>
       <tbody id="tableBody"></tbody>
@@ -354,11 +380,31 @@ html,body{height:100%;font-family:'DM Sans',sans-serif;background:var(--bg);colo
       <div style="font-size:12px;color:var(--text2);margin-bottom:12px;">
         배정할 MAWB: <span class="mono fw5" id="assignMawbLabel"></span>
       </div>
-      <div class="assign-search">
-        <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><circle cx="5" cy="5" r="3.5" stroke="#9a9890" stroke-width="1.3"/><path d="M8 8l2.5 2.5" stroke="#9a9890" stroke-width="1.3" stroke-linecap="round"/></svg>
-        <input type="text" id="assignSearch" placeholder="FLEX-ID 또는 Client 검색…" oninput="renderAssignOpts()">
+      <!-- 탭 -->
+      <div class="ftabs" style="margin-bottom:12px;">
+        <div class="ftab active" id="atab-search" onclick="switchAssignTab('search',this)">Shipment 검색</div>
+        <div class="ftab" id="atab-manual" onclick="switchAssignTab('manual',this)">수동 입력</div>
       </div>
-      <div class="assign-opts" id="assignOpts"></div>
+      <!-- 검색 탭 -->
+      <div id="assign-search-panel">
+        <div class="assign-search">
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><circle cx="5" cy="5" r="3.5" stroke="#9a9890" stroke-width="1.3"/><path d="M8 8l2.5 2.5" stroke="#9a9890" stroke-width="1.3" stroke-linecap="round"/></svg>
+          <input type="text" id="assignSearch" placeholder="FLEX-ID 또는 Client 검색…" oninput="renderAssignOpts()">
+        </div>
+        <div class="assign-opts" id="assignOpts"></div>
+      </div>
+      <!-- 수동 입력 탭 -->
+      <div id="assign-manual-panel" style="display:none;">
+        <div class="fg">
+          <label class="flabel">FLEX-ID <span style="color:var(--red);">*</span></label>
+          <input class="finput mono" id="manualFlexId" placeholder="예: 3932111">
+        </div>
+        <div class="fg">
+          <label class="flabel">Client</label>
+          <input class="finput" id="manualClient" placeholder="Client 이름 (선택)">
+        </div>
+        <div style="font-size:11px;color:var(--text3);margin-top:4px;">Booking Sheet에 없는 shipment도 직접 입력해서 배정할 수 있어요.</div>
+      </div>
     </div>
     <div class="modal-ftr">
       <button class="btn" onclick="closeAssignModal()">취소</button>
@@ -427,8 +473,9 @@ var stocks = [];        // mawb_stock 테이블
 var shipments = [];     // shipments 테이블 (배정용)
 var filterVal = 'all';
 var airlineFilter = 'all';
-var assigningId = null; // 배정 중인 stock id
-var assignSelectedSid = null;
+var assigningId = null;
+var assignSelectedSids = [];
+var selectedStockIds = []; // 벌크 선택
 
 // ── AIRLINES ──
 // 항공사 목록 — AIRLINES_KEY 로 localStorage에 저장/불러오기
@@ -496,6 +543,17 @@ async function sbDelete(table, id) {
 }
 
 function uid() { return Date.now().toString(36)+Math.random().toString(36).slice(2,5); }
+
+// MAWB check digit 검증 — 앞 7자리 % 7 === 마지막 1자리 (check digit)
+function isValidMawb(prefix, number) {
+  // number는 8자리 문자열 (예: "53311790")
+  var s = String(number).padStart(8, '0');
+  if (s.length !== 8) return false;
+  var serial = parseInt(s.slice(0, 7), 10);  // 앞 7자리
+  var check  = parseInt(s.slice(7),    10);  // 마지막 1자리
+  if (isNaN(serial) || isNaN(check)) return false;
+  return serial % 7 === check;
+}
 function setLoad(on) { document.getElementById('loadBar').style.display = on ? 'block' : 'none'; }
 
 
@@ -575,6 +633,82 @@ function resetAirlines() {
   showToast('초기화됨');
 }
 
+
+function onRowClick(e, id) {
+  // 버튼/체크박스 클릭은 무시
+  if (e.target.tagName === 'BUTTON' || e.target.tagName === 'INPUT') return;
+}
+
+// ── BULK SELECT ──
+function onCbChange() {
+  selectedStockIds = Array.from(document.querySelectorAll('.stock-cb:checked')).map(function(cb){ return cb.getAttribute('data-id'); });
+  var total = document.querySelectorAll('.stock-cb').length;
+  var cbAll = document.getElementById('cbAll');
+  if (cbAll) cbAll.checked = selectedStockIds.length === total && total > 0;
+  updateBulkBar();
+}
+
+function toggleAllCb(master) {
+  document.querySelectorAll('.stock-cb').forEach(function(cb){ cb.checked = master.checked; });
+  selectedStockIds = master.checked
+    ? Array.from(document.querySelectorAll('.stock-cb')).map(function(cb){ return cb.getAttribute('data-id'); })
+    : [];
+  updateBulkBar();
+}
+
+function clearSelection() {
+  selectedStockIds = [];
+  document.querySelectorAll('.stock-cb').forEach(function(cb){ cb.checked = false; });
+  var cbAll = document.getElementById('cbAll');
+  if (cbAll) cbAll.checked = false;
+  updateBulkBar();
+}
+
+function updateBulkBar() {
+  var bar = document.getElementById('bulkBar');
+  var cnt = document.getElementById('bulkCount');
+  if (!bar) return;
+  if (selectedStockIds.length > 0) {
+    bar.classList.add('show');
+    cnt.textContent = selectedStockIds.length + '개 선택됨';
+  } else {
+    bar.classList.remove('show');
+  }
+}
+
+async function bulkVoid() {
+  if (selectedStockIds.length === 0) return;
+  if (!confirm(selectedStockIds.length + '개를 Void 처리할까요?')) return;
+  setLoad(true);
+  try {
+    for (var i = 0; i < selectedStockIds.length; i++) {
+      await sbPatch('mawb_stock', selectedStockIds[i], {voided: true});
+      var s = stocks.find(function(x){ return x.id === selectedStockIds[i]; });
+      if (s) s.voided = true;
+    }
+    clearSelection();
+    await loadAll();
+    showToast(selectedStockIds.length + '개 Void 처리됨 ✓');
+  } catch(e) { showToast('처리 실패: '+e.message, true); }
+  finally { setLoad(false); }
+}
+
+async function bulkDelete() {
+  if (selectedStockIds.length === 0) return;
+  if (!confirm(selectedStockIds.length + '개를 삭제할까요? 이 작업은 되돌릴 수 없어요.')) return;
+  setLoad(true);
+  try {
+    for (var i = 0; i < selectedStockIds.length; i++) {
+      await sbDelete('mawb_stock', selectedStockIds[i]);
+    }
+    stocks = stocks.filter(function(s){ return selectedStockIds.indexOf(s.id) === -1; });
+    clearSelection();
+    renderKPIs(); renderAirlines(); renderTable();
+    showToast(selectedStockIds.length + '개 삭제됨');
+  } catch(e) { showToast('삭제 실패: '+e.message, true); }
+  finally { setLoad(false); }
+}
+
 // ── LOAD ──
 async function loadAll() {
   setLoad(true);
@@ -582,7 +716,10 @@ async function loadAll() {
   if (syncEl) syncEl.textContent = '⟳ 동기화 중…';
   try {
     var sRows = await sbGet('mawb_stock?order=created_at.asc');
-    stocks = sRows || [];
+    stocks = (sRows || []).map(function(r) {
+      r.assigned_shipments = r.assigned_shipments || [];
+      return r;
+    });
     // Load shipments for assignment (only new/scheduled, no mawb yet or unassigned)
     var shRows = await sbGet('shipments?select=id,flex_id,client,dest,status,mawb&order=created_at.desc');
     shipments = (shRows || []).map(function(r){
@@ -594,7 +731,7 @@ async function loadAll() {
     var now = new Date().toLocaleTimeString('ko-KR',{hour:'2-digit',minute:'2-digit'});
     if (syncEl) syncEl.textContent = '✓ '+now+' 동기화됨';
     document.getElementById('pageSubtitle').textContent =
-      '총 '+stocks.length+'개 · 사용 가능 '+stocks.filter(function(s){return !s.used;}).length+'개';
+      '총 '+stocks.length+'개 · 사용 가능 '+stocks.filter(function(s){return !s.used && !s.voided;}).length+'개';
   } catch(e) {
     showToast('로드 실패: '+e.message, true);
     if (syncEl) syncEl.textContent = '⚠ 연결 실패';
@@ -604,12 +741,14 @@ async function loadAll() {
 // ── KPIs ──
 function renderKPIs() {
   var total = stocks.length;
-  var avail = stocks.filter(function(s){return !s.used;}).length;
-  var used  = total - avail;
+  var avail = stocks.filter(function(s){return !s.used && !s.voided;}).length;
+  var used  = stocks.filter(function(s){return s.used;}).length;
+  var voided = stocks.filter(function(s){return s.voided;}).length;
   var rate  = total ? Math.round(avail/total*100) : 0;
   document.getElementById('kpi-total').textContent = total.toLocaleString();
   document.getElementById('kpi-avail').textContent = avail.toLocaleString();
   document.getElementById('kpi-used').textContent  = used.toLocaleString();
+  document.getElementById('kpi-void').textContent  = voided.toLocaleString();
   var rateEl = document.getElementById('kpi-rate');
   rateEl.textContent = rate + '%';
   rateEl.className = 'kpi-val ' + (rate > 50 ? 'green' : rate > 20 ? 'amber' : 'red');
@@ -623,13 +762,13 @@ function renderAirlines() {
   stocks.forEach(function(s) {
     if (!byPrefix[s.prefix]) byPrefix[s.prefix] = {total:0, avail:0};
     byPrefix[s.prefix].total++;
-    if (!s.used) byPrefix[s.prefix].avail++;
+    if (!s.used && !s.voided) byPrefix[s.prefix].avail++;
   });
   var prefixes = Object.keys(byPrefix);
   var h = '<div class="airline-pill '+(airlineFilter==='all'?'active':'')+'" onclick="setAirline(\'all\',this)">'
     + '<span class="airline-pill-code">전체</span>'
     + '<div class="airline-pill-counts">'
-    + '<span class="ap-avail">'+stocks.filter(function(s){return !s.used;}).length+'</span>'
+    + '<span class="ap-avail">'+stocks.filter(function(s){return !s.used && !s.voided;}).length+'</span>'
     + '<span class="ap-used">'+stocks.filter(function(s){return s.used;}).length+'</span>'
     + '</div></div>';
   prefixes.forEach(function(pfx) {
@@ -682,7 +821,7 @@ function updateAirlineDropdown() {
   stocks.forEach(function(s) {
     if (!byPrefix[s.prefix]) byPrefix[s.prefix] = {total:0, avail:0};
     byPrefix[s.prefix].total++;
-    if (!s.used) byPrefix[s.prefix].avail++;
+    if (!s.used && !s.voided) byPrefix[s.prefix].avail++;
   });
   var opts = '<option value="all">항공사 전체</option>';
   // Show AIRLINES first
@@ -721,8 +860,9 @@ function renderTable() {
 
   var filtered = stocks.filter(function(s) {
     if (airlineFilter !== 'all' && s.prefix !== airlineFilter) return false;
-    if (filterVal === 'avail' && s.used) return false;
+    if (filterVal === 'avail' && (s.used || s.voided)) return false;
     if (filterVal === 'used' && !s.used) return false;
+    if (filterVal === 'void' && !s.voided) return false;
     if (q) {
       var hay = [s.prefix, s.number, s.flex_id||'', s.client||''].join(' ').toLowerCase();
       if (hay.indexOf(q) === -1) return false;
@@ -741,13 +881,26 @@ function renderTable() {
   filtered.forEach(function(s) {
     var al = getAirline(s.prefix);
     var mawbFmt = s.prefix + '-' + (s.number||'');
-    var statusBadge = s.used
-      ? '<span class="badge badge-used"><span class="badge-dot"></span>사용 완료</span>'
-      : '<span class="badge badge-avail"><span class="badge-dot"></span>사용 가능</span>';
+    var statusBadge = s.voided
+      ? '<span class="badge badge-void"><span class="badge-dot"></span>Void</span>'
+      : s.used
+        ? '<span class="badge badge-used"><span class="badge-dot"></span>사용 완료</span>'
+        : '<span class="badge badge-avail"><span class="badge-dot"></span>사용 가능</span>';
     var assignCell = '';
-    if (s.used && s.flex_id) {
-      assignCell = '<div class="assign-chip"><span class="flex-id">'+esc(s.flex_id)+'</span><span class="client">'+esc(s.client||'')+'</span></div>';
-    } else if (!s.used) {
+    if (s.voided) {
+      assignCell = '<span style="font-size:11px;color:var(--text3);">—</span>';
+    } else if (s.assigned_shipments && s.assigned_shipments.length > 0) {
+      var btnLabel = '+ 추가 배정';
+      assignCell = '<div class="assign-chips">'
+        + s.assigned_shipments.map(function(sh) {
+            return '<span class="assign-chip">'
+              + '<span class="flex-id">'+esc(sh.flexId||'')+'</span>'
+              + '<button class="assign-chip-x" onclick="event.stopPropagation();removeAssignment(\''+s.id+'\',\''+esc(sh.flexId||'')+'\')">✕</button>'
+              + '</span>';
+          }).join('')
+        + '</div>'
+        + '<button class="assign-btn" style="margin-top:4px;" onclick="openAssignModal(\''+s.id+'\',\''+mawbFmt+'\')">+ 추가 배정</button>';
+    } else if (!s.used && !s.voided) {
       assignCell = '<button class="assign-btn" onclick="openAssignModal(\''+s.id+'\',\''+mawbFmt+'\')">+ Shipment 배정</button>';
     }
     var createdDate = s.created_at ? new Date(s.created_at).toLocaleDateString('ko-KR',{month:'numeric',day:'numeric'}) : '—';
@@ -758,13 +911,22 @@ function renderTable() {
       + '<td>'+statusBadge+'</td>'
       + '<td>'+assignCell+'</td>'
       + '<td style="color:var(--text3);font-size:11px;">'+createdDate+'</td>'
-      + '<td style="text-align:right;">'
-      + (s.used ? '<button class="btn sm" onclick="unassign(\''+s.id+'\')">배정 해제</button>' : '')
-      + ' <button class="btn sm danger" onclick="deleteStock(\''+s.id+'\')">삭제</button>'
-      + '</td>'
+      + '<td style="text-align:right;"><div style="display:flex;gap:5px;justify-content:flex-end;align-items:center;">'
+      + (s.used ? '<button class="btn sm" onclick="unassign(\''+s.id+'\')" style="white-space:nowrap;">배정 해제</button> ' : '')
+      + (!s.used && !s.voided ? '<button class="btn sm" onclick="voidStock(\''+s.id+'\')\" style="color:#6b46c1;border-color:#d9d0ff;" style="white-space:nowrap;">Void</button> ' : '')
+      + (s.voided ? '<button class="btn sm" onclick="unvoidStock(\''+s.id+'\')" style="white-space:nowrap;">Void 해제</button> ' : '')
+      + '<button class="btn sm danger" onclick="deleteStock(\''+s.id+'\')" style="white-space:nowrap;">Delete</button>'
+      + '</div></td>'
       + '</tr>';
   });
   tbody.innerHTML = rows;
+  // 선택 상태 복원
+  document.querySelectorAll('.stock-cb').forEach(function(cb) {
+    if (selectedStockIds.indexOf(cb.getAttribute('data-id')) !== -1) cb.checked = true;
+  });
+  var cbAll = document.getElementById('cbAll');
+  var allCbs = document.querySelectorAll('.stock-cb');
+  if (cbAll && allCbs.length > 0) cbAll.checked = selectedStockIds.length === allCbs.length;
 }
 
 // ── ADD MODAL ──
@@ -792,6 +954,10 @@ async function submitAdd() {
   var memo   = document.getElementById('a-memo').value.trim();
   if (!prefix || prefix.length !== 3) { markErr('a-prefix','Prefix는 3자리'); return; }
   if (!number || !/^\d{8}$/.test(number)) { markErr('a-number','번호는 8자리 숫자'); return; }
+  if (!isValidMawb(prefix, number)) {
+    markErr('a-number', number + '는 유효하지 않은 MAWB 번호예요 (Check digit 오류 — 마지막 숫자가 앞 7자리 % 7 나머지여야 해요)');
+    return;
+  }
   // Check duplicate
   if (stocks.find(function(s){ return s.prefix===prefix && s.number===number; })) {
     showToast(prefix+'-'+number+' 이미 등록된 번호예요', true); return;
@@ -834,10 +1000,17 @@ function updateRangePreview() {
   var toN   = parseInt(to,10);
   if (isNaN(fromN)||isNaN(toN)||toN<fromN) { prev.style.display='none'; return; }
   var count = toN - fromN + 1;
+  // 유효한 번호만 카운트
+  var validCount = 0;
+  for (var i = fromN; i <= toN; i++) {
+    var _s = String(i).padStart(8,'0');
+    if (parseInt(_s.slice(0,7),10) % 7 === parseInt(_s.slice(7),10)) validCount++;
+  }
   prev.style.display = 'block';
-  prev.innerHTML = '<strong>'+count+'개</strong> 생성 예정 · '
+  prev.innerHTML = '<strong>'+validCount+'개</strong> 유효 번호 생성 예정'
+    + ' <span style="color:var(--text3);">(전체 범위 '+count+'개 중 check digit 통과)</span><br>'
     + pfx+'-'+String(fromN).padStart(8,'0')+' ~ '+pfx+'-'+String(toN).padStart(8,'0');
-  if (count > 500) prev.innerHTML += ' <span style="color:var(--red);">⚠ 500개 초과 불가</span>';
+  if (validCount > 500) prev.innerHTML += ' <span style="color:var(--red);">⚠ 500개 초과 불가</span>';
 }
 
 async function submitRange() {
@@ -856,8 +1029,10 @@ async function submitRange() {
   setLoad(true);
   try {
     var rows = [];
+    var skipped = 0;
     for (var n = fromN; n <= toN; n++) {
       var numStr = String(n).padStart(8,'0');
+      if (!isValidMawb(prefix, numStr)) { skipped++; continue; } // check digit 검증
       if (!stocks.find(function(s){return s.prefix===prefix&&s.number===numStr;})) {
         rows.push({id:uid(), prefix:prefix, number:numStr, airline:airline, used:false, memo:memo});
       }
@@ -868,7 +1043,7 @@ async function submitRange() {
     }
     closeRangeModal();
     await loadAll();
-    showToast(rows.length+'개 추가됨 ✓');
+    showToast(rows.length+'개 추가됨 ✓' + (skipped > 0 ? ' ('+skipped+'개 유효하지 않은 번호 제외)' : ''));
   } catch(e) { showToast('추가 실패: '+e.message, true); }
   finally { setLoad(false); }
 }
@@ -876,20 +1051,34 @@ async function submitRange() {
 // ── ASSIGN MODAL ──
 function openAssignModal(stockId, mawbLabel) {
   assigningId = stockId;
-  assignSelectedSid = null;
+  assignSelectedSids = [];
   document.getElementById('assignMawbLabel').textContent = mawbLabel;
   document.getElementById('assignSearch').value = '';
+  document.getElementById('manualFlexId').value = '';
+  document.getElementById('manualClient').value = '';
+  switchAssignTab('search', document.getElementById('atab-search'));
   renderAssignOpts();
   document.getElementById('assignOverlay').classList.add('open');
   setTimeout(function(){ document.getElementById('assignSearch').focus(); }, 50);
+}
+
+function switchAssignTab(tab, btn) {
+  document.querySelectorAll('.ftab').forEach(function(t){ t.classList.remove('active'); });
+  btn.classList.add('active');
+  document.getElementById('assign-search-panel').style.display = tab === 'search' ? '' : 'none';
+  document.getElementById('assign-manual-panel').style.display = tab === 'manual' ? '' : 'none';
+  // 버튼 텍스트
+  var confirmBtn = document.querySelector('#assignOverlay .modal-ftr .btn.primary');
+  if (confirmBtn) confirmBtn.textContent = tab === 'manual' ? '수동 배정' : '배정';
 }
 function closeAssignModal() { document.getElementById('assignOverlay').classList.remove('open'); assigningId=null; }
 
 function renderAssignOpts() {
   var q = (document.getElementById('assignSearch').value||'').toLowerCase();
-  // Show shipments with no mawb assigned
+  var stock = stocks.find(function(x){ return x.id === assigningId; });
+  var alreadyAssigned = ((stock && stock.assigned_shipments) || []).map(function(s){ return s.flexId; });
   var opts = shipments.filter(function(s) {
-    if (s.mawb) return false; // already has mawb
+    if (alreadyAssigned.indexOf(s.flexId) !== -1) return false;
     if (q) {
       var hay = [(s.flexId||''),(s.client||''),(s.dest||'')].join(' ').toLowerCase();
       return hay.indexOf(q) !== -1;
@@ -898,12 +1087,13 @@ function renderAssignOpts() {
   });
   var el = document.getElementById('assignOpts');
   if (opts.length === 0) {
-    el.innerHTML = '<div style="padding:20px;text-align:center;color:var(--text3);font-size:12px;">MAWB 미배정 Shipment가 없어요</div>';
+    el.innerHTML = '<div style="padding:20px;text-align:center;color:var(--text3);font-size:12px;">배정 가능한 Shipment가 없어요</div>';
     return;
   }
   el.innerHTML = opts.map(function(s) {
-    var isSel = assignSelectedSid === s.id;
-    return '<div class="assign-opt'+(isSel?' sel':'')+'" onclick="selectAssignOpt(\''+s.id+'\')">'
+    var isSel = assignSelectedSids.indexOf(s.id) !== -1;
+    return '<div class="assign-opt'+(isSel?' sel':'')+'" onclick="toggleAssignOpt(\'' + s.id + '\')">'
+      + '<div class="assign-opt-check-multi">'+(isSel?'✓':'')+'</div>'
       + '<div class="assign-opt-id">'+(s.flexId||'TBA')+'</div>'
       + '<div class="assign-opt-client">'+(s.client||'—')+'</div>'
       + '<div class="assign-opt-dest">'+(s.dest||'')+'</div>'
@@ -911,50 +1101,143 @@ function renderAssignOpts() {
   }).join('');
 }
 
-function selectAssignOpt(sid) {
-  assignSelectedSid = sid;
+function toggleAssignOpt(sid) {
+  var idx = assignSelectedSids.indexOf(sid);
+  if (idx === -1) assignSelectedSids.push(sid);
+  else assignSelectedSids.splice(idx, 1);
   renderAssignOpts();
+  var btn = document.querySelector('#assignOverlay .modal-ftr .btn.primary');
+  if (btn) btn.textContent = assignSelectedSids.length > 0 ? '배정 (' + assignSelectedSids.length + '건)' : '배정';
 }
 
 async function confirmAssign() {
-  if (!assigningId || !assignSelectedSid) { showToast('Shipment를 선택해주세요', true); return; }
-  var stock   = stocks.find(function(s){return s.id===assigningId;});
-  var ship    = shipments.find(function(s){return s.id===assignSelectedSid;});
-  if (!stock||!ship) return;
-  var mawb = stock.prefix+' '+stock.number.slice(0,4)+' '+stock.number.slice(4);
+  // 수동 입력 탭이 활성화된 경우
+  var manualPanel = document.getElementById('assign-manual-panel');
+  if (manualPanel && manualPanel.style.display !== 'none') {
+    var flexId = (document.getElementById('manualFlexId').value || '').trim();
+    var client = (document.getElementById('manualClient').value || '').trim();
+    if (!flexId) { document.getElementById('manualFlexId').classList.add('err'); showToast('FLEX-ID를 입력해주세요', true); return; }
+    var stock = stocks.find(function(s){return s.id===assigningId;});
+    if (!stock) return;
+    var mawbFmt = stock.prefix+' '+stock.number.slice(0,4)+' '+stock.number.slice(4);
+    setLoad(true);
+    try {
+      var existing = stock.assigned_shipments || [];
+      var merged = existing.concat([{flexId:flexId, client:client, assignedAt:new Date().toISOString()}]);
+      await sbPatch('mawb_stock', assigningId, {
+        used:true, flex_id:merged.map(function(s){return s.flexId;}).join(', '),
+        client:merged.map(function(s){return s.client||'';}).join(', '),
+        assigned_shipments:merged, assigned_at:new Date().toISOString()
+      });
+      closeAssignModal();
+      await loadAll();
+      showToast(mawbFmt+' → '+flexId+' 수동 배정 완료 ✓');
+    } catch(e) { showToast('배정 실패: '+e.message, true); }
+    finally { setLoad(false); }
+    return;
+  }
+  if (!assigningId || assignSelectedSids.length === 0) { showToast('Shipment를 선택해주세요 (복수 선택 가능)', true); return; }
+  var stock = stocks.find(function(s){return s.id===assigningId;});
+  if (!stock) return;
+  var mawb = stock.prefix+'-'+stock.number.slice(0,4)+' '+stock.number.slice(4);
+  var mawbFmt = stock.prefix+' '+stock.number.slice(0,4)+' '+stock.number.slice(4);
   setLoad(true);
   try {
-    // Update mawb_stock → used
+    // 기존 배정 목록 + 새로 선택한 것 합치기
+    var existing = stock.assigned_shipments || [];
+    var newAssignments = assignSelectedSids.map(function(sid) {
+      var ship = shipments.find(function(s){ return s.id === sid; });
+      return { flexId: ship.flexId, client: ship.client, assignedAt: new Date().toISOString() };
+    });
+    var merged = existing.concat(newAssignments);
+
+    // mawb_stock 업데이트
     await sbPatch('mawb_stock', assigningId, {
-      used: true, flex_id: ship.flexId, client: ship.client,
+      used: true,
+      flex_id: merged.map(function(s){return s.flexId;}).join(', '),
+      client: merged.map(function(s){return s.client||'';}).join(', '),
+      assigned_shipments: merged,
       assigned_at: new Date().toISOString()
     });
-    // Update shipment → mawb
-    await sbPatch('shipments', assignSelectedSid, {
-      mawb: mawb,
-      plan_data: Object.assign({}, ship.planData||{}, {mawb: mawb})
-    });
+
+    // 각 shipment에 MAWB 업데이트
+    for (var i = 0; i < assignSelectedSids.length; i++) {
+      var ship = shipments.find(function(s){ return s.id === assignSelectedSids[i]; });
+      if (ship) {
+        await sbPatch('shipments', ship.id, { mawb: mawbFmt });
+      }
+    }
     closeAssignModal();
     await loadAll();
-    showToast(mawb+' → '+ship.flexId+' 배정 완료 ✓');
+    showToast(mawb+' → '+assignSelectedSids.length+'건 배정 완료 ✓');
   } catch(e) { showToast('배정 실패: '+e.message, true); }
   finally { setLoad(false); }
 }
 
-// ── UNASSIGN ──
+// ── UNASSIGN (전체) ──
 async function unassign(stockId) {
-  if (!confirm('배정을 해제할까요? Shipment의 MAWB도 삭제됩니다.')) return;
+  if (!confirm('전체 배정을 해제할까요? 모든 Shipment의 MAWB도 삭제됩니다.')) return;
   var stock = stocks.find(function(s){return s.id===stockId;});
   if (!stock) return;
   setLoad(true);
   try {
-    // Find shipment by flex_id and clear mawb
-    var ship = shipments.find(function(s){return s.flexId===stock.flex_id;});
-    if (ship) await sbPatch('shipments', ship.id, {mawb:''});
-    await sbPatch('mawb_stock', stockId, {used:false, flex_id:null, client:null, assigned_at:null});
+    var assigned = stock.assigned_shipments || [];
+    for (var i = 0; i < assigned.length; i++) {
+      var ship = shipments.find(function(s){return s.flexId===assigned[i].flexId;});
+      if (ship) await sbPatch('shipments', ship.id, {mawb:''});
+    }
+    await sbPatch('mawb_stock', stockId, {used:false, flex_id:null, client:null, assigned_shipments:[], assigned_at:null});
     await loadAll();
-    showToast('배정 해제됨');
+    showToast('전체 배정 해제됨');
   } catch(e) { showToast('해제 실패: '+e.message, true); }
+  finally { setLoad(false); }
+}
+
+// ── REMOVE SINGLE ASSIGNMENT (칩 X 버튼) ──
+async function removeAssignment(stockId, flexId) {
+  if (!confirm(flexId+' 배정을 해제할까요?')) return;
+  var stock = stocks.find(function(s){return s.id===stockId;});
+  if (!stock) return;
+  setLoad(true);
+  try {
+    var remaining = (stock.assigned_shipments||[]).filter(function(s){return s.flexId!==flexId;});
+    var ship = shipments.find(function(s){return s.flexId===flexId;});
+    if (ship) await sbPatch('shipments', ship.id, {mawb:''});
+    await sbPatch('mawb_stock', stockId, {
+      used: remaining.length > 0,
+      assigned_shipments: remaining,
+      flex_id: remaining.map(function(s){return s.flexId;}).join(', ')||null,
+      client: remaining.map(function(s){return s.client||'';}).join(', ')||null,
+    });
+    await loadAll();
+    showToast(flexId+' 배정 해제됨');
+  } catch(e) { showToast('해제 실패: '+e.message, true); }
+  finally { setLoad(false); }
+}
+
+// ── VOID / UNVOID ──
+async function voidStock(stockId) {
+  if (!confirm('이 MAWB를 Void 처리할까요? 사용하지 않았지만 더 이상 사용할 수 없는 번호로 처리됩니다.')) return;
+  setLoad(true);
+  try {
+    await sbPatch('mawb_stock', stockId, {voided: true});
+    var s = stocks.find(function(x){return x.id===stockId;});
+    if (s) s.voided = true;
+    renderKPIs(); renderAirlines(); renderTable();
+    showToast('Void 처리됨');
+  } catch(e) { showToast('처리 실패: '+e.message, true); }
+  finally { setLoad(false); }
+}
+
+async function unvoidStock(stockId) {
+  setLoad(true);
+  try {
+    await sbPatch('mawb_stock', stockId, {voided: false});
+    var s = stocks.find(function(x){return x.id===stockId;});
+    if (s) s.voided = false;
+    renderKPIs(); renderAirlines(); renderTable();
+    showToast('Void 해제됨');
+  } catch(e) { showToast('처리 실패: '+e.message, true); }
   finally { setLoad(false); }
 }
 
@@ -1019,8 +1302,13 @@ function showToast(msg, isErr) {
 });
 
 // ── NAV DATE ──
+var _d = new Date();
+var _days = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
 document.getElementById('navDate').textContent =
-  new Date().toLocaleDateString('ko-KR',{year:'numeric',month:'long',day:'numeric',weekday:'short'});
+  _d.getFullYear() + '-'
+  + String(_d.getMonth()+1).padStart(2,'0') + '-'
+  + String(_d.getDate()).padStart(2,'0')
+  + ' (' + _days[_d.getDay()] + ')';
 
 // ── INIT ──
 // Create table if doesn't exist — handled via SQL
